@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+// import Form from './components/Form';
+import Register from './components/Register';
 import './App.css';
 
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import Home from './components/Home';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 function App() {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(()=>{
+    if(!user){
+      navigate('/')
+    }
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<Navigate to={'/registration'} />} />
+        <Route path="/registration" element={<Register />} />
+      </Routes>
     </div>
   );
 }
