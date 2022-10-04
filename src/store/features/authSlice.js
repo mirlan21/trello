@@ -2,9 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const intitialState = {
   userData: [],
+
   user: null,
   error: null,
 };
+console.log(intitialState.userData);
 
 export const sendingUserdata = createAsyncThunk(
   'UserData/sentUserdata',
@@ -20,13 +22,14 @@ export const sendingUserdata = createAsyncThunk(
         body: JSON.stringify(formData),
       }
     );
+
     if (!user.ok) {
       user.json().then((formData) => {
         alert(formData.error.message);
         return;
       });
     }
-    localStorage.setItem('token', user.idToken);
+    // localStorage.setItem('token', user.idToken);
     return user.json();
   }
 );
@@ -63,12 +66,11 @@ export const loginRequest = createAsyncThunk(
           body: JSON.stringify(formData),
         }
       );
-      
 
       if (!user.ok) {
         user.json().then((data) => {
-          alert(data.error.message)
-        } )
+          alert(data.error.message);
+        });
 
         return;
       }
@@ -79,8 +81,6 @@ export const loginRequest = createAsyncThunk(
     }
   }
 );
-
-
 
 // export const getUsersData = createAsyncThunk();
 
@@ -93,11 +93,9 @@ const userSlice = createSlice({
       state.status = 'success';
     },
     [loginRequest.fulfilled]: (state, action) => {
-
       state.user = action.payload;
       state.status = 'success';
     },
-
   },
 
   reducers: {

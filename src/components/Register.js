@@ -19,16 +19,25 @@ function Register() {
   console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+
+
   useEffect(() => {
     if (!user) return;
     return navigate('/home');
   }, [user]);
+
+
+
+
+  
   const onSubmit = (data) => {
     if (isLogin) {
-      dispatch(loginRequest({ ...data, returnSecureToken: true }));
+      dispatch(loginRequest({ ...data, }));
       // return navigate('/home');
     } else {
-      dispatch(sendingUserdata({ ...data, returnSecureToken: true }));
+      dispatch(sendingUserdata({ ...data,}));
     }
   };
 
@@ -60,7 +69,6 @@ function Register() {
                 required: 'Type minimum 6 number',
                 minLength: {
                   value: 6,
-                  message: '',
                 },
               })}
               type="password"

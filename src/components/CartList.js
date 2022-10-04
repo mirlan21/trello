@@ -9,7 +9,7 @@ function CartList({ item, todos, setTodos }) {
   const [toDos, setInputTodos] = useState('');
   const [list, setList] = useState([]);
 
-  const [isShowListItem, setIsShowListItem] = useState(false);
+  // const [isShowListItem, setIsShowListItem] = useState(false);
 
   const changeInputValueHandler = (event) => {
     setInputTodos(event.target.value);
@@ -52,9 +52,7 @@ function CartList({ item, todos, setTodos }) {
     setTodos([...todos]);
     console.log(todos[index]);
   };
-  // const SaveToDos = () => {
-  //   todos
-  // }
+
   const changeText = (id, name) => {
     setInputValue({
       id: id,
@@ -63,6 +61,7 @@ function CartList({ item, todos, setTodos }) {
     setIsShow(true);
   };
   console.log(isModalShow);
+
   return (
     <Card>
       <Container>
@@ -79,7 +78,10 @@ function CartList({ item, todos, setTodos }) {
           </div>
         ) : (
           <>
-            <p style={{color: 'whitesmoke'}} onClick={() => changeText(item.id, item.toDoListName)}>
+            <p
+              style={{ color: 'whitesmoke' }}
+              onClick={() => changeText(item.id, item.toDoListName)}
+            >
               {item.toDoListName}
             </p>
             <ButtonDelete onClick={() => setIsModalShow(true)}>X</ButtonDelete>
@@ -89,7 +91,6 @@ function CartList({ item, todos, setTodos }) {
         {isModalShow && (
           <GeneralModal onClose={setIsModalShow}>
             <DeleteModal />
-
           </GeneralModal>
         )}
       </Container>
@@ -127,7 +128,8 @@ const Card = styled.div`
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 `;
 
 const Container = styled.div`
@@ -185,6 +187,5 @@ const Wrapper = styled.div`
 `;
 const Items = styled.p`
   margin-top: 10px;
-color: whitesmoke;
-
+  color: whitesmoke;
 `;
